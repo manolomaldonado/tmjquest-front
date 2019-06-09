@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
+import { User } from '../../../models/user.model';
+import { environment } from 'src/environments/environment';
+
+@Injectable({ providedIn: 'root' })
 export class UserService {
+    constructor(private http: HttpClient) { }
 
-  constructor() { }
+    getAll() {
+        return this.http.get<User[]>(environment.apiUrl + '/users');
+    }
 }
