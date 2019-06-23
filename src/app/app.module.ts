@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CustomMaterialModule } from './core/material.module';
 
 // used to create fake backend
 //import { fakeBackendProvider } from './_helpers';
@@ -11,18 +14,22 @@ import { routing } from './app.routing';
 
 import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { ErrorInterceptor } from './core/helpers/error.interceptor';
-//import { HomeComponent } from './home';
+import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { LoginComponent } from './modules/login/login.component';
 
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         ReactiveFormsModule,
+        FormsModule,
         HttpClientModule,
+        CustomMaterialModule,
         routing
     ],
     declarations: [
         AppComponent,
+        DashboardComponent,
         LoginComponent
     ],
     providers: [
