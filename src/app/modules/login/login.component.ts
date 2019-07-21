@@ -22,7 +22,10 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
+            email: ['', Validators.compose([
+                Validators.required,
+                Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+              ])],
             password: ['', Validators.required]
         });
 
@@ -44,8 +47,13 @@ export class LoginComponent implements OnInit {
             return;
         }
 
-        this.loading = true;
-        this.authenticationService.login(this.f.username.value, this.f.password.value)
+        this.loading = true; 
+        //TODO: Check different options for devise api login request params
+        var user: { [key: string]: string } = {
+            'email': this.f.email.value,
+            'password' : this.f.password.value
+        };  
+        this.authenticationService.login(user)
             .pipe(first())
             .subscribe(
                 data => {
